@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Post a Parking Space</title>
+  </head>
+  <body class="bg-gray-100">
+    {% include 'navbar.html' %}
+    <!-- Include the navigation bar -->
+
+    <div class="container mx-auto p-8">
+      <h1 class="text-4xl font-bold text-blue-600 mb-8">
+        Post a Parking Space
+      </h1>
+      <form method="post" class="bg-white shadow-lg rounded-lg p-8">
+        {% csrf_token %}
+        <div class="mb-6">
+          <label for="location" class="block text-gray-700">Location:</label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-6">
+          <label for="city" class="block text-gray-700">City:</label>
+          <select
+            name="city"
+            id="city"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          >
+            <option value="" disabled selected>Select a city</option>
+            <option value="Pune">Pune</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label for="price_per_hour" class="block text-gray-700"
+            >Price per Hour:</label
+          >
+          <input
+            type="number"
+            name="price_per_hour"
+            id="price_per_hour"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+        >
+          Post Parking Space
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Book Parking Space</title>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+      <h1 class="text-2xl font-bold">Book {{ parking_space.location }}</h1>
+      <form method="post" class="mt-4">
+        {% csrf_token %}
+        <label for="hours" class="block">Enter number of hours:</label>
+        <input type="number" name="hours" class="border p-2 rounded" required />
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+          Confirm Booking
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

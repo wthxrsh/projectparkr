@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>My Bookings</title>
+  </head>
+  <body class="bg-gray-100">
+    {% include 'navbar.html' %}
+    <!-- Include the navigation bar -->
+
+    <div class="container mx-auto p-8">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-blue-600">My Bookings</h1>
+      </header>
+      <div class="bg-white shadow-lg rounded-lg p-8">
+        <ul class="mt-4">
+          {% for booking in bookings %}
+          <li class="border-b border-gray-300 py-6">
+            <h2 class="font-semibold text-lg">
+              Parking Space: {{ booking.parking_space.location }}
+            </h2>
+            <p class="text-gray-700">City: {{ booking.parking_space.city }}</p>
+            <p class="text-gray-700">Hours: {{ booking.hours }}</p>
+            <p class="text-gray-700">
+              Booking Date and Time: {{ booking.created_at|date:"Y-m-d H:i:s" }}
+            </p>
+            <p class="text-gray-700">
+              QR Code:
+              <img
+                src="/media/qr_codes/{{ booking.qr_code }}.png"
+                alt="QR Code"
+                class="mt-2"
+              />
+            </p>
+
+            <!-- Delete Button -->
+            <form
+              action="{% url 'delete_booking' booking.id %}"
+              method="post"
+              class="mt-4"
+            >
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+              >
+                Delete Booking
+              </button>
+            </form>
+          </li>
+          {% empty %}
+          <li class="py-6">No bookings found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
